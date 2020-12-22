@@ -1,0 +1,17 @@
+.error__message {
+  display: inline-block;
+  font-size: 25px;
+  text-align: center;
+  color: red;
+  position: relative;
+  left: 20%;
+  margin-top: 10%;
+  padding: 10px;
+  background-color: antiquewhite;
+}
+.loading__message {
+  display: inline-block;
+  font-size: 25px;
+  margin: 20px;
+  padding: 10px;
+}

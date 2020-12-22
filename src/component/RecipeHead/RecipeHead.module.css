@@ -1,0 +1,10 @@
+.recipe__head {
+  height: 200px;
+  width: 100%;
+  background-color: #ffd501;
+}
+.recipe__head > span {
+  display: inline-block;
+  margin: 130px auto auto 10px;
+  font-size: 40px;
+}

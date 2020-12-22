@@ -1,0 +1,44 @@
+.time__servings__kcal {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+.time__servings__kcal > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.time__servings__kcal > div > p {
+  margin-left: 10px;
+}
+
+.ingredients > div:nth-of-type(1) {
+  margin-top: 20px;
+}
+.ingredients > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.ingredients > div > img,
+.ingredients > div > p {
+  margin: 0px;
+}
+.ingredients > div > p {
+  margin-left: 10px;
+}
+
+.steps {
+  margin-bottom: 15px;
+}
+.steps:nth-of-type(1) {
+  margin-top: 20px;
+}
+.steps > img {
+  margin-bottom: 10px;
+}
+p {
+  font-size: 16px;
+}
