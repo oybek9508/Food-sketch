@@ -1,45 +1,47 @@
-import React, { useState, useEffect } from "react";
-import styles from "./RecipeList.module.css";
-import RecipeListRender from "../RecipeListRender/RecipeListRender";
 import { Grid } from "@material-ui/core";
-import { Alert } from "react-bootstrap";
-// import BASE_URL from "../../services/api";
 import axios from "axios";
-import { Button } from "@material-ui/core";
+import React, { useEffect, useState } from "react";
 import RecipeHead from "../RecipeHead/RecipeHead";
+import RecipeListRender from "../RecipeListRender/RecipeListRender";
+import styles from "./RecipeList.module.css";
 
 const LOADING = "LOADING";
-const ERROR = "ERROR";
 
 function RecipeList() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState("");
-  const [recipe, setRecipe] = useState([]);
-  const [sort, setSort] = useState("asc");
+  const [recipesCategorized, setRecipesCategorized] = useState({});
 
-  useEffect(async () => {
-    setLoading(LOADING);
-    try {
-      const { data } = await axios.get(
-        "https://asia-northeast1-sharexpere-prod.cloudfunctions.net/recipe"
-      );
-      setError("");
-      setLoading("");
-      setRecipe(data);
-      console.log(data);
-    } catch (error) {
-      setError(error);
-    }
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(LOADING);
+      try {
+        const { data } = await axios.get(
+          "https://asia-northeast1-sharexpere-prod.cloudfunctions.net/recipe"
+        );
+        setError("");
+        setLoading("");
+        const categorized = {};
+        data.forEach((recipe) => {
+          if (categorized[recipe.category]) {
+            categorized[recipe.category].push(recipe);
+          } else {
+            categorized[recipe.category] = [recipe];
+          }
+        });
+
+        // sorting the list by category
+        Object.keys(categorized).forEach((category) => {
+          const categoryItems = categorized[category];
+          categoryItems.sort((a, b) => a.name.localeCompare(b.name));
+        });
+        setRecipesCategorized(categorized);
+      } catch (error) {
+        setError(error);
+      }
+    };
+    fetchData();
   }, []);
-
-  const sorted = recipe.sort((a, b) => {
-    const isReversed = sort === "asc" ? 1 : -1;
-    return isReversed * a.category.localeCompare(b.category);
-  });
-
-  const onSort = (sortType) => {
-    setSort(sortType);
-  };
 
   return (
     <>
@@ -53,38 +55,53 @@ function RecipeList() {
         {!error && loading === LOADING && (
           <span className={styles.loading__message}>LOADING ...</span>
         )}
-        <Button
-          onClick={() => onSort("asc")}
-          variant="contained"
-          style={{
-            marginTop: "30px",
-            marginLeft: "10px",
-            backgroundColor: "#ffd501",
-          }}
-        >
-          Filter Asc
-        </Button>
-        <Button
-          onClick={() => onSort("desc")}
-          variant="contained"
-          style={{
-            marginTop: "30px",
-            marginLeft: "10px",
-            backgroundColor: "#ffd501",
-          }}
-        >
-          Filter Desc
-        </Button>
-        <Grid className={styles.recipe__list} container spacing={1}>
-          {sorted.map((recipe_item) => {
-            return (
-              <RecipeListRender key={recipe_item.id} recipe={recipe_item} />
-            );
-          })}
-        </Grid>
+        {Object.keys(recipesCategorized).map((categoryName) => {
+          const recipes = recipesCategorized[categoryName];
+          return (
+            <div
+              className={styles.recipe__container}
+              key={categoryName}
+              style={{ marginBottom: 50, padding: "10px 10px" }}
+            >
+              <h1>{categoryName}</h1>
+              <Grid
+                className={styles.recipe__list}
+                container
+                spacing={1}
+                alignItems="flex-start"
+              >
+                {recipes.map((r) => (
+                  <RecipeListRender key={r.id} recipe={r} />
+                ))}
+              </Grid>
+            </div>
+          );
+        })}
       </div>
     </>
   );
 }
 
 export default RecipeList;
+
+// The above sorting function works something like this ->
+
+// const sss = [
+//   {category: 'japanese',name: 'Item 1'},
+//   {category: 'korean',name: ''},
+//   {category: 'japanese',name: ''},
+//   {category: 'japanese',name: ''},
+//   {category: 'korean',name: ''},
+// ]
+
+// const fin = {
+//   japense: [
+//     {category: 'japanese',name: ''},
+//     {category: 'japanese',name: ''},
+//     {category: 'japanese',name: ''},
+//   ],
+//   korean: [
+//     {category: 'korean',name: ''},
+//     {category: 'korean',name: ''},
+//   ]
+// }

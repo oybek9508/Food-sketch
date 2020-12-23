@@ -3,10 +3,8 @@ import styles from "./RecipeListRender.module.css";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import timeIcon from "../../images/sample_icons/time_gray@3x.png";
 import eyeIcon from "../../images/sample_icons/eye@3x.png";
@@ -28,21 +26,17 @@ const useStyles = makeStyles({
 export default function RecipeListRender({ recipe }) {
   const classes = useStyles();
   const viewCount = Math.floor(Math.random() * 10000);
+  const { picture, name, id, cookingTime } = recipe;
   return (
-    <Link to={"/" + recipe.id}>
-      <p>{recipe.category}</p>
+    <Link to={"/" + id}>
       <Card className={classes.root} style={{ marginTop: "50px" }}>
         <CardActionArea>
-          <CardMedia
-            className={classes.media}
-            image={recipe.picture}
-            title={recipe.name}
-          />
+          <CardMedia className={classes.media} image={picture} title={name} />
         </CardActionArea>
         <CardActionArea>
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              <strong>{recipe.name}</strong>
+              <strong>{name}</strong>
             </Typography>
           </CardContent>
           <div className={styles.card__view}>
@@ -55,7 +49,7 @@ export default function RecipeListRender({ recipe }) {
               <p style={{ marginLeft: "10px" }}>
                 <CountUp
                   start={0}
-                  end={recipe.cookingTime}
+                  end={cookingTime}
                   duration={1.5}
                   separator=","
                 />

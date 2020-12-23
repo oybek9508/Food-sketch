@@ -1,3 +1,33 @@
+# Cooking recipe App
+
+# Description
+
+This project was built using ReactJs mainly. This project lists Korean and Japanese food alphabetically on the screen. When you click one of the listed foods, It will show the recipe spesifically to that food. For returning back to the listed foods, you can click the top left return icon '<' that looks like this.
+
+이 프로젝트는 주로 ReactJs를 사용하여 구축되었습니다. 이 프로젝트는 화면에 한식과 일식을 알파벳순으로 나열합니다. 나열된 음식 중 하나를 클릭하면 해당 음식에 대한 레시피가 구체적으로 표시됩니다. 나열된 음식으로 돌아가려면 다음과 같은 왼쪽 상단의 반품 아이콘 '<'을 클릭하면됩니다.
+
+# Installation and running the app from your editor
+
+Unzip the file first
+
+먼저 파일의 압축을 풉니 다.
+
+In your terminal, cd into the directory
+
+터미널에서 디렉토리로 cd 하새요
+
+Type npm install to install all dependencies
+
+모든 종속성을 설치하려면 npm install을 입력하십시오.
+
+Last, but not least, type npm start to run the app locally.
+
+마지막으로 npm start를 입력하여 앱을 로컬로 실행합니다.
+
+To look at the code, just open up the project in your favorite code editor!
+
+코드를 보려면 좋아하는 코드 편집기에서 프로젝트를여십시오!
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -15,3 +15,11 @@
   margin: 20px;
   padding: 10px;
 }
+@media (max-width: 768px) {
+  .recipe__list {
+    spacing: "10px";
+  }
+  .recipe__container {
+    padding: 10px 10px;
+  }
+}

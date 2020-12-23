@@ -42,3 +42,15 @@
 p {
   font-size: 16px;
 }
+.cooking__steps {
+  background-color: #ffd501;
+  width: 26px;
+  height: 26px;
+  text-align: center;
+  margin-left: 0px;
+  border-radius: 5px;
+  display: grid;
+  place-content: center;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
